@@ -1,50 +1,9 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>EsseaWeb</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f4f4f4;
-      margin: 0;
-      padding: 0;
-      text-align: center;
-    }
-    header {
-      background: #2c3e50;
-      color: white;
-      padding: 2rem 1rem;
-    }
-    main {
-      padding: 2rem;
-    }
-    footer {
-      background: #ddd;
-      padding: 1rem;
-      font-size: 0.9rem;
-    }
-    a.button {
-      display: inline-block;
-      margin-top: 1rem;
-      padding: 0.7rem 1.5rem;
-      background: #3498db;
-      color: white;
-      text-decoration: none;
-      border-radius: 5px;
-    }
-    a.button:hover {
-      background: #2980b9;
-    }
-  </style>
-</head>
-<body>
-  <header>
-    <h1>Benvenuto su EsseaWeb</h1>
-    <p>This is a test</p>
-  </header>
-  <title>Calcolo differenza tra date</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EsseaWeb - Calcolo differenza tra date</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
   <style>
     * {
@@ -55,20 +14,68 @@
       margin: 0;
       font-family: 'Montserrat', sans-serif;
       background: linear-gradient(135deg, #74ebd5, #9face6);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* HEADER */
+    header {
+      background-color: rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(8px);
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: white;
+    }
+
+    header h1 {
+      font-size: 1.4rem;
+      margin: 0;
+    }
+
+    .menu-toggle {
+      font-size: 1.5rem;
+      cursor: pointer;
+      display: block;
+    }
+
+    nav {
+      display: none;
+      flex-direction: column;
+      background-color: rgba(0, 0, 0, 0.2);
+      backdrop-filter: blur(6px);
+      padding: 10px 20px;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin: 8px 0;
+      font-weight: 500;
+    }
+
+    nav.show {
+      display: flex;
+    }
+
+    /* CARD */
+    .container {
+      flex: 1;
       display: flex;
       align-items: center;
       justify-content: center;
-      height: 100vh;
-      overflow: hidden;
+      padding: 20px;
     }
 
     .card {
       background: rgba(255, 255, 255, 0.15);
       backdrop-filter: blur(12px);
       border-radius: 20px;
-      padding: 40px;
-      width: 90%;
-      max-width: 420px;
+      padding: 30px 20px;
+      width: 100%;
+      max-width: 400px;
       box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
       text-align: center;
       animation: fadeIn 1s ease-out;
@@ -82,7 +89,8 @@
     h2 {
       color: #fff;
       font-weight: 600;
-      margin-bottom: 30px;
+      margin-bottom: 20px;
+      font-size: 1.4rem;
     }
 
     label {
@@ -91,6 +99,7 @@
       color: #fff;
       font-weight: 500;
       text-align: left;
+      font-size: 0.95rem;
     }
 
     input[type="date"] {
@@ -98,15 +107,15 @@
       padding: 10px;
       border: none;
       border-radius: 8px;
-      font-size: 16px;
-      background-color: rgba(255, 255, 255, 0.8);
+      font-size: 1rem;
+      background-color: rgba(255, 255, 255, 0.85);
       color: #333;
     }
 
     button {
-      margin-top: 25px;
-      padding: 12px 24px;
-      font-size: 16px;
+      margin-top: 20px;
+      padding: 12px;
+      font-size: 1rem;
       font-weight: 600;
       color: white;
       background: linear-gradient(to right, #667eea, #764ba2);
@@ -114,6 +123,7 @@
       border-radius: 8px;
       cursor: pointer;
       transition: transform 0.2s ease;
+      width: 100%;
     }
 
     button:hover {
@@ -121,55 +131,61 @@
     }
 
     #risultato {
-      margin-top: 25px;
-      font-size: 18px;
+      margin-top: 20px;
+      font-size: 1rem;
       color: #fff;
       font-weight: 500;
       min-height: 24px;
     }
-
-    @media (max-width: 500px) {
-      .card {
-        padding: 30px 20px;
-      }
-    }
   </style>
 </head>
 <body>
-  <div class="card">
-    <h2>📅 Calcola la differenza tra due date</h2>
 
-    <label for="data1">Data iniziale:</label>
-    <input type="date" id="data1">
+  <header>
+    <h1>EsseaWeb</h1>
+    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+  </header>
 
-    <label for="data2">Data finale:</label>
-    <input type="date" id="data2">
+  <nav id="menu">
+    <a href="#">Home</a>
+    <a href="#">Servizi</a>
+    <a href="#">Contatti</a>
+    <a href="#">Chi siamo</a>
+  </nav>
 
-    <button onclick="calcolaDifferenza()">Calcola</button>
-
-    <div id="risultato"></div>
+  <div class="container">
+    <div class="card">
+      <h2>📅 Calcola la differenza tra due date</h2>
+      <label for="dataInizio">Data iniziale:</label>
+      <input type="date" id="dataInizio">
+      <label for="dataFine">Data finale:</label>
+      <input type="date" id="dataFine">
+      <button onclick="calcolaDifferenza()">Calcola</button>
+      <div id="risultato"></div>
+    </div>
   </div>
 
   <script>
-    function calcolaDifferenza() {
-      const d1 = new Date(document.getElementById("data1").value);
-      const d2 = new Date(document.getElementById("data2").value);
-      const risultato = document.getElementById("risultato");
+    function toggleMenu() {
+      const menu = document.getElementById('menu');
+      menu.classList.toggle('show');
+    }
 
-      if (isNaN(d1) || isNaN(d2)) {
-        risultato.textContent = "⚠️ Inserisci entrambe le date.";
+    function calcolaDifferenza() {
+      const inizio = new Date(document.getElementById('dataInizio').value);
+      const fine = new Date(document.getElementById('dataFine').value);
+      const risultato = document.getElementById('risultato');
+
+      if (isNaN(inizio) || isNaN(fine)) {
+        risultato.textContent = "Inserisci entrambe le date.";
         return;
       }
 
-      const diffMs = Math.abs(d2 - d1);
-      const diffGiorni = Math.ceil(diffMs / (1000 * 60 * 60 * 24));
-
-      risultato.textContent = `✅ La differenza è di ${diffGiorni} giorno/i.`;
+      const diffMs = fine - inizio;
+      const diffGiorni = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+      risultato.textContent = `La differenza è di ${diffGiorni} giorno/i.`;
     }
   </script>
 
-  <footer>
-    &copy; 2025 EsseaWeb. Tutti i diritti riservati.
-  </footer>
 </body>
 </html>
